@@ -1,0 +1,275 @@
+/* ==========================================================================
+   SEASTRIDE ENGINEERING — "Ocean Light" Theme Overlay
+   Light blue & white, modern maritime look. Loaded AFTER main.css so it
+   only overrides colors, backgrounds and adds animation polish.
+   No HTML structure, content, or JS functionality is touched by this file.
+   ========================================================================== */
+
+:root{
+  /* Core palette swapped from dark navy → light blue / white */
+  --navy-950: #eaf4fb;   /* was near-black → now palest blue (backgrounds) */
+  --navy-900: #ffffff;   /* was deep navy → now white (panels, footer, header-scrolled) */
+  --navy-800: #f4f9fd;
+  --navy-700: #dceefa;
+  --navy-600: #2c4f68;
+
+  --steel-500: #2f7fb8;
+  --steel-400: #4b9bd6;
+
+  --mist-200: #4c6b82;   /* body copy on light/dark panels, kept readable */
+  --mist-100: #eef6fc;
+
+  --paper: #f6fbfe;
+
+  /* Brass accent → sea-teal / ocean blue accent, keeps all existing
+     .btn-primary / brass-based utility classes working with a matching hue */
+  --brass-500: #1a86c9;
+  --brass-400: #3aa3e0;
+  --brass-300: #8fd0f2;
+
+  --signal-teal: #17a2a0;
+  --danger: #d1583a;
+  --white: #ffffff;
+}
+
+/* ---- Base surfaces ---- */
+body{
+  background:
+    radial-gradient(1200px 500px at 90% -10%, rgba(58,163,224,.10), transparent 60%),
+    radial-gradient(900px 500px at -10% 20%, rgba(23,162,160,.08), transparent 55%),
+    var(--paper);
+  color:#132635;
+}
+
+/* ---- Header: fully transparent until scrolled, then solid white ---- */
+.site-header{
+  background:transparent;
+  border-bottom:1px solid transparent;
+  box-shadow:none;
+}
+.site-header.scrolled{
+  background:#ffffff;
+  backdrop-filter:blur(14px) saturate(1.4);
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);
+  border-bottom:1px solid rgba(26,134,201,.14);
+  box-shadow:0 8px 30px -18px rgba(20,80,120,.35);
+}
+.site-header.scrolled .nav-logo-text{color:#0f2a3d;}
+.site-header.scrolled .nav-links a{color:#2c4f68;}
+.site-header.scrolled .nav-links a:hover,
+.site-header.scrolled .nav-links a.active{color:var(--brass-500);}
+.nav-toggle span{background:#123249;}
+.site-header.scrolled .nav-toggle span{background:#123249;}
+.site-header:not(.scrolled) .nav-toggle span{background:#ffffff;}
+
+/* Mobile nav drawer keeps dark-on-light readability */
+@media (max-width:1000px){
+  .nav-links{
+    background:#ffffff;
+    box-shadow:-20px 0 60px rgba(20,80,120,.18);
+  }
+  .nav-links a{color:#2c4f68;border-bottom:1px solid rgba(20,80,120,.08);}
+}
+
+/* ---- Hero: ship photo as ambient background, soft blue wash ---- */
+.hero{
+  background:#0d2a3f;
+}
+.hero-media{
+  background-image:url('../images/hero_ship_bg.webp');
+  background-size:cover;
+  background-position:center 55%;
+}
+.hero-media img{
+  opacity:.55;
+  transform:scale(1.06);
+  animation:heroDrift 22s ease-in-out infinite alternate;
+}
+@keyframes heroDrift{
+  0%{transform:scale(1.06) translate(0,0);}
+  100%{transform:scale(1.12) translate(-1.5%, -1%);}
+}
+.hero-media::after{
+  background:
+    linear-gradient(180deg, rgba(6,26,42,.45) 0%, rgba(8,40,62,.35) 35%, rgba(6,30,48,.92) 100%),
+    linear-gradient(90deg, rgba(6,30,48,.78) 0%, rgba(6,30,48,.08) 58%);
+}
+.hero-tagline{color:var(--brass-300);}
+.hero h1 em{color:var(--brass-300);}
+.hero-sub{color:#dcecf7;}
+
+/* Gentle floating water shimmer across hero bottom edge */
+.hero::before{
+  content:'';
+  position:absolute;left:0;right:0;bottom:0;height:120px;z-index:1;
+  pointer-events:none;
+  background:linear-gradient(180deg, transparent, rgba(234,244,251,.9));
+}
+
+/* ---- Buttons ---- */
+.btn-primary{
+  background:linear-gradient(135deg, var(--brass-500), var(--signal-teal));
+  color:#ffffff;
+  box-shadow:0 8px 20px -8px rgba(26,134,201,.55);
+}
+.btn-primary:hover{
+  background:linear-gradient(135deg, var(--brass-400), var(--signal-teal));
+  box-shadow:0 14px 28px -10px rgba(26,134,201,.6);
+}
+.btn-outline{border-color:#a9d2ea;color:#123249;}
+.btn-outline:hover{border-color:var(--brass-500);color:var(--brass-500);}
+.btn-outline.on-dark{border-color:rgba(255,255,255,.5);color:#ffffff;}
+.btn-outline.on-dark:hover{border-color:var(--brass-300);color:var(--brass-300);}
+
+/* ---- Section variants ---- */
+.section-alt{
+  background:linear-gradient(180deg, #eef7fc, #e4f2fa);
+}
+.section-dark{
+  background:linear-gradient(160deg, #0d2a3f, #0f3a57);
+  color:#ffffff;
+}
+.section-dark p{color:#cfe6f4;}
+
+/* ---- Page hero (inner pages) ---- */
+.page-hero{
+  background:linear-gradient(160deg, #0d2a3f, #12456a);
+}
+.page-hero::before{
+  background-image:
+    linear-gradient(rgba(143,208,242,.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(143,208,242,.10) 1px, transparent 1px);
+}
+.breadcrumb a{color:var(--brass-300);}
+
+/* ---- Tagged frames (corner-bracket photo frames) ---- */
+.tagged-frame::before,.tagged-frame::after{border-color:var(--brass-400);}
+.tagged-frame .tag-label{
+  background:rgba(13,42,63,.82);
+  color:var(--brass-300);
+  border-color:rgba(58,163,224,.5);
+}
+
+/* ---- Cards ---- */
+.card{
+  background:#ffffff;
+  border:1px solid rgba(26,134,201,.14);
+  box-shadow:0 2px 14px -10px rgba(20,80,120,.25);
+}
+.card:hover{
+  border-color:var(--brass-400);
+  box-shadow:0 22px 44px -22px rgba(20,80,120,.35);
+}
+.card .idx{color:var(--brass-500);}
+
+.flip-front{background:linear-gradient(200deg, #0d2a3f, #123249);}
+.flip-back{
+  background:linear-gradient(200deg, #0f3350, #0d2a3f);
+  border-color:var(--brass-400);
+}
+
+/* ---- Stats strip ---- */
+.stats-strip{
+  background:linear-gradient(135deg, #0d2a3f, #12456a);
+  border-top:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.stat{border-left:1px solid rgba(255,255,255,.1);}
+.stat .num{color:var(--brass-300);}
+.stat .label{color:#cfe6f4;}
+
+/* ---- Testimonials ---- */
+.testi-quote{color:#123249;}
+.testi-author{color:var(--steel-500);}
+.testi-dot{background:rgba(18,50,73,.18);}
+.testi-dot.active{background:var(--brass-500);}
+
+/* ---- Footer ---- */
+.site-footer{
+  background:linear-gradient(180deg, #0d2a3f, #081c2c);
+  color:#cfe6f4;
+}
+.footer-top{border-bottom:1px solid rgba(255,255,255,.1);}
+.footer-col h4{color:var(--brass-300);}
+.footer-col a{color:#cfe6f4;}
+.footer-col a:hover{color:var(--brass-300);}
+.footer-bottom{color:rgba(255,255,255,.45);}
+
+/* ---- Floating action buttons: subtle breathing motion ---- */
+.to-top, .wa-float{
+  animation:floatPulse 3.2s ease-in-out infinite;
+}
+@keyframes floatPulse{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-4px);}
+}
+
+/* ---- Reveal-on-scroll: soften/upgrade the entrance motion ---- */
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .8s var(--ease), transform .8s var(--ease);
+}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ---- Text contrast fix: white bg → blue text, blue bg → white text ---- */
+body{color:#123249;}
+h1,h2,h3,h4,h5,h6{color:#0d2a3f;}
+p, li, span, a{color:inherit;}
+
+.section-alt, .section-alt h2, .section-alt h3, .section-alt p{color:#123249;}
+.card, .card h3, .card p{color:#123249;}
+.card .idx{color:var(--brass-500);}
+
+.eyebrow{color:var(--brass-500);}
+.lede{color:#2c4f68;}
+
+.testi-quote{color:#123249;}
+.testi-author{color:var(--steel-500);}
+
+.breadcrumb{color:#2c4f68;}
+.breadcrumb a{color:var(--brass-500);}
+
+/* Dark/blue surfaces get white text */
+.hero, .hero h1, .hero-content, .hero-sub, .hero-tagline{color:#ffffff;}
+.hero h1 em{color:var(--brass-300);}
+
+.section-dark, .section-dark h2, .section-dark h3, .section-dark p, .section-dark li{color:#ffffff;}
+
+.page-hero, .page-hero h1{color:#ffffff;}
+.breadcrumb{}
+.page-hero .breadcrumb{color:#dcecf7;}
+.page-hero .breadcrumb a{color:var(--brass-300);}
+
+.stats-strip, .stat .num, .stat .label{color:#ffffff;}
+.stat .num{color:var(--brass-300);}
+
+.flip-front, .flip-front h3, .flip-front .num{color:#ffffff;}
+.flip-back, .flip-back li{color:#ffffff;}
+
+.site-footer, .site-footer a, .footer-col a, .footer-bottom{color:#ffffff;}
+.footer-col h4{color:var(--brass-300);}
+.footer-col a:hover{color:var(--brass-300);}
+
+.site-header.scrolled .nav-logo-text{color:#0f2a3d;}
+.site-header.scrolled .nav-links a{color:#2c4f68;}
+.site-header:not(.scrolled) .nav-links a{color:#ffffff;}
+.nav-logo-text{color:#ffffff;}
+.site-header.scrolled .nav-logo-text{color:#0f2a3d;}
+
+.btn-primary{color:#ffffff;}
+.btn-outline{color:#123249;}
+.btn-outline.on-dark{color:#ffffff;}
+
+/* ---- Selection color ---- */
+::selection{background:var(--brass-300);color:#0d2a3f;}
+
+/* ---- Forms: dark labels, black input text ---- */
+.field label{color:#132635;}
+.field input, .field select, .field textarea{color:#000000;}
+
+/* ---- Scrollbar accent (progressive enhancement, no layout impact) ---- */
+::-webkit-scrollbar{width:10px;}
+::-webkit-scrollbar-track{background:#eaf4fb;}
+::-webkit-scrollbar-thumb{background:var(--brass-400);border-radius:6px;}
+::-webkit-scrollbar-thumb:hover{background:var(--brass-500);}
